@@ -26,4 +26,6 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.32'
 }
 
+task stage(dependsOn: ['clean', 'installDist'])
+installDist.mustRunAfter clean
 
