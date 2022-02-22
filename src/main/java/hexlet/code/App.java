@@ -5,6 +5,11 @@ import io.javalin.core.JavalinConfig;
 
 public class App {
 
+    private static int getPort() {
+        String port = System.getenv().getOrDefault("PORT", "5000");
+        return Integer.parseInt(port);
+    }
+
 
     private static void addRoutes(Javalin app) {
         app.get("/", ctx -> ctx.result("Hello World"));
@@ -21,6 +26,6 @@ public class App {
 
     public static void main(String[] args) {
         Javalin app = getApp();
-        app.start(5000);
+        app.start(getPort());
     }
 }
