@@ -1,1 +1,1 @@
-web: java -jar build/libs/app-1.0-SNAPSHOT
+web: sh build/install/app/bin/app
