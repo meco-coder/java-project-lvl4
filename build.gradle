@@ -32,6 +32,10 @@ heroku {
     appName = "infinite-beyond-57265"
 }
 
+application {
+    mainClass = 'hexlet.code.App'
+}
+
 task stage(dependsOn: ['clean', 'installDist'])
 installDist.mustRunAfter clean
 
