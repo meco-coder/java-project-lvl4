@@ -2,6 +2,11 @@ package hexlet.code;
 
 import io.javalin.Javalin;
 import io.javalin.core.JavalinConfig;
+import io.javalin.plugin.rendering.template.JavalinThymeleaf;
+import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 public class App {
 
@@ -10,13 +15,28 @@ public class App {
         return Integer.parseInt(port);
     }
 
+    private static TemplateEngine getTemplateEngine() {
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.addDialect(new LayoutDialect());
+        templateEngine.addDialect(new Java8TimeDialect());
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setPrefix("/templates/");
+        templateEngine.addTemplateResolver(templateResolver);
+
+        return templateEngine;
+    }
+
 
     private static void addRoutes(Javalin app) {
-        app.get("/", ctx -> ctx.result("Hello World"));
+        app.get("/", ctx -> ctx.render("index.html"));
     }
 
     public static Javalin getApp() {
-        Javalin app = Javalin.create(JavalinConfig::enableDevLogging);
+        Javalin app = Javalin.create(config -> {
+            config.enableDevLogging();
+            JavalinThymeleaf.configure(getTemplateEngine());
+
+        });
         addRoutes(app);
         app.before(ctx -> {
             ctx.attribute("ctx", ctx);

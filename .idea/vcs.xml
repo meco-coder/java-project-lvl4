@@ -4,6 +4,7 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/gradle-getting-started" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/gradle-getting-started/java-getting-started" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/hexletprojectlvl4" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/java-getting-started" vcs="Git" />
   </component>
 </project>
