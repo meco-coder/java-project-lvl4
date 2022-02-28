@@ -1,0 +1,12 @@
+datasource:
+  db:
+    username: ""
+    password: ""
+    url: "jdbc:h2:./database"
+
+ebean:
+  db:
+    ddl:
+      generate: true
+      run: true
+      seedSql: seed.sql
