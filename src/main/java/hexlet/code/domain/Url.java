@@ -11,12 +11,12 @@ import java.time.Instant;
 @Entity
 public class Url extends Model {
     @Id
-    private Long id;
+    private long id;
 
-    private final String name;
+    private String name;
 
     @WhenCreated
-    private final Instant createdAt;
+    private Instant createdAt;
 
     public Url(String name) {
         this.name = name;
@@ -31,7 +31,7 @@ public class Url extends Model {
         return name;
     }
 
-    public String getCreatedAt() {
-        return createdAt.toString();
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 }

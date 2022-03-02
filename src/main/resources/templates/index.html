@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layouts/application.html}">
 
 <head>
-    <title>Welcome</title>
+    <title>Анализатор страниц</title>
 </head>
-<body>
 <section layout:fragment="content">
-    <p class="text-center">Hello World!</p>
+    <div class="container p-3 mb-2 bg-dark text-white">
+        <h1 class="display-4 text-center">Анализатор страниц</h1>
+        <form action="/urls" method="post">
+            <div class="mb-3">
+                <label> Url</label>
+                <input class="form-control" type="url" name="name">
+            </div>
+            <button class="btn btn-primary" th:href="@{/urls}"
+                    type="submit">Создать
+            </button>
+        </form>
+    </div>
 </section>
-</body>
