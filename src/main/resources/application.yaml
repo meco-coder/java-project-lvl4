@@ -6,9 +6,9 @@ datasource:
     url: "jdbc:h2:./database"
 
   production:
-    username: rwhcanvijppkmu
-    password: 690fb364b529e09f87a48c853d9560a4b29a1b036af8a2cdac49c47e5e4ff084
-    url: postgres://rwhcanvijppkmu:690fb364b529e09f87a48c853d9560a4b29a1b036af8a2cdac49c47e5e4ff084@ec2-34-246-24-110.eu-west-1.compute.amazonaws.com:5432/d24r53llr3df94
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+    url: ${JDBC_DATABASE_URL}
 
 ebean:
   migration:
