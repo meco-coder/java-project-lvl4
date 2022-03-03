@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UrlsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">hexlet.code.controllers</a> &gt; <span class="el_source">UrlsController.java</span></div><h1>UrlsController.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package hexlet.code.controllers;</span>
+
+import hexlet.code.domain.Url;
+import hexlet.code.domain.query.QUrl;
+
+import io.javalin.http.Handler;
+
+import java.net.URL;
+import java.util.List;
+
+
+<span class="nc" id="L12">public class UrlsController {</span>
+
+    private static Boolean UrlValidator(String url) {
+        try {
+<span class="nc" id="L16">            new URL(url).toURI();</span>
+<span class="nc" id="L17">            return true;</span>
+<span class="nc" id="L18">        } catch (Exception e) {</span>
+<span class="nc" id="L19">            return false;</span>
+        }
+    }
+
+    private static Boolean CheckUrls(String url) {
+<span class="nc" id="L24">        List&lt;Url&gt; urlList = new QUrl()</span>
+<span class="nc" id="L25">                .orderBy()</span>
+<span class="nc" id="L26">                .id.asc()</span>
+<span class="nc" id="L27">                .findList();</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        for (Url urlCheck : urlList) {</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">            if (urlCheck.getName().equals(url)) {</span>
+<span class="nc" id="L30">                return true;</span>
+            }
+<span class="nc" id="L32">        }</span>
+<span class="nc" id="L33">        return false;</span>
+    }
+
+    private static String BuildUrl(URL url) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (url.getPort() == -1) {</span>
+<span class="nc" id="L38">            return &quot;https://&quot; + url.getHost() + &quot;:8080&quot;;</span>
+        }
+<span class="nc" id="L40">        return &quot;https://&quot; + url.getHost() + &quot;:&quot; + url.getPort();</span>
+    }
+
+
+<span class="fc" id="L44">    public static Handler listUrls = ctx -&gt; {</span>
+
+<span class="nc" id="L46">        List&lt;Url&gt; urlSt = new QUrl()</span>
+<span class="nc" id="L47">                .orderBy()</span>
+<span class="nc" id="L48">                .id.asc()</span>
+<span class="nc" id="L49">                .findList();</span>
+
+<span class="nc" id="L51">        ctx.attribute(&quot;urls&quot;, urlSt);</span>
+<span class="nc" id="L52">        ctx.render(&quot;urls/index.html&quot;);</span>
+<span class="nc" id="L53">    };</span>
+
+<span class="fc" id="L55">    public static Handler createUrl = ctx -&gt; {</span>
+
+<span class="nc" id="L57">        String name = ctx.formParam(&quot;name&quot;);</span>
+
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (UrlValidator(name)) {</span>
+<span class="nc" id="L60">            URL url = new URL(name);</span>
+<span class="nc" id="L61">            String buildUrl = BuildUrl(url);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if (CheckUrls(buildUrl)) {</span>
+<span class="nc" id="L63">                ctx.sessionAttribute(&quot;flash&quot;, &quot;Страница уже существует&quot;);</span>
+<span class="nc" id="L64">                ctx.redirect(&quot;/urls&quot;);</span>
+<span class="nc" id="L65">                return;</span>
+            }
+<span class="nc" id="L67">            Url urls = new Url(buildUrl);</span>
+<span class="nc" id="L68">            urls.save();</span>
+<span class="nc" id="L69">            ctx.sessionAttribute(&quot;flash&quot;, &quot;Страница успешно добавлена&quot;);</span>
+<span class="nc" id="L70">            ctx.redirect(&quot;/urls&quot;);</span>
+<span class="nc" id="L71">        } else {</span>
+<span class="nc" id="L72">            ctx.sessionAttribute(&quot;flash&quot;, &quot;Некорректный URL&quot;);</span>
+<span class="nc" id="L73">            ctx.redirect(&quot;/&quot;);</span>
+        }
+
+<span class="nc" id="L76">    };</span>
+
+
+<span class="fc" id="L79">    public static Handler showUrl = ctx -&gt; {</span>
+
+<span class="nc" id="L81">        long id = ctx.pathParamAsClass(&quot;id&quot;, Long.class).getOrDefault(null);</span>
+
+<span class="nc" id="L83">        Url url = new QUrl()</span>
+<span class="nc" id="L84">                .id.equalTo(id)</span>
+<span class="nc" id="L85">                .findOne();</span>
+
+<span class="nc" id="L87">        ctx.attribute(&quot;url&quot;, url);</span>
+<span class="nc" id="L88">        ctx.render(&quot;urls/show.html&quot;);</span>
+
+
+<span class="nc" id="L91">    };</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
