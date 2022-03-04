@@ -1,8 +1,8 @@
 package hexlet.code;
 
 
-
 import hexlet.code.domain.Url;
+import hexlet.code.domain.query.QUrl;
 import io.ebean.DB;
 import io.ebean.Transaction;
 import io.javalin.Javalin;
@@ -36,7 +36,7 @@ public class AppTest {
         int port = app.port();
         baseUrl = "http://localhost:" + port;
 
-        existingUrl = new Url("https://github.com/");
+        existingUrl = new Url("https://github.com:8080");
         existingUrl.save();
     }
 
@@ -62,33 +62,90 @@ public class AppTest {
         assertThat(response.getBody()).contains("Анализатор страниц");
     }
 
-//    void testCreate() {
-//        String inputName = "https://ru.hexlet.io/";
-//        HttpResponse<String> responsePost = Unirest
-//                .post(baseUrl)
-//                .field("name", inputName)
-//                .field("description", inputDescription)
-//                .asEmpty();
-//
-//        assertThat(responsePost.getStatus()).isEqualTo(302);
-//        assertThat(responsePost.getHeaders().getFirst("Location")).isEqualTo("/articles");
-//
-//        HttpResponse<String> response = Unirest
-//                .get(baseUrl + "/articles")
-//                .asString();
-//        String body = response.getBody();
-//
-//        assertThat(response.getStatus()).isEqualTo(200);
-//        assertThat(body).contains(inputName);
-//        assertThat(body).contains("Статья успешно создана");
-//
-//        Article actualArticle = new QArticle()
-//                .name.equalTo(inputName)
-//                .findOne();
-//
-//        assertThat(actualArticle).isNotNull();
-//        assertThat(actualArticle.getName()).isEqualTo(inputName);
-//        assertThat(actualArticle.getDescription()).isEqualTo(inputDescription);
-//    }
+    @Test
+    void testCreateUrl() {
+        String inputName = "https://ru.hexlet.io/";
+        HttpResponse<String> responsePost = Unirest
+                .post(baseUrl + "/urls")
+                .field("name", inputName)
+                .asEmpty();
+
+        assertThat(responsePost.getStatus()).isEqualTo(302);
+        assertThat(responsePost.getHeaders().getFirst("Location")).isEqualTo("/urls");
+
+        HttpResponse<String> response = Unirest
+                .get(baseUrl + "/urls")
+                .asString();
+        String body = response.getBody();
+
+        assertThat(response.getStatus()).isEqualTo(200);
+        assertThat(body).contains("https://ru.hexlet.io:8080");
+        assertThat(body).contains("Страница успешно добавлена");
+
+        Url actualUrl = new QUrl()
+                .name.equalTo("https://ru.hexlet.io:8080")
+                .findOne();
+
+        assertThat(actualUrl).isNotNull();
+        assertThat(actualUrl.getName()).isEqualTo("https://ru.hexlet.io:8080");
+    }
+
+
+    @Test
+    void testCreateUrl_negative() {
+        String inputName = "hps://github.com/";
+        HttpResponse<String> responsePost = Unirest
+                .post(baseUrl + "/urls")
+                .field("name", inputName)
+                .asEmpty();
+
+        assertThat(responsePost.getStatus()).isEqualTo(302);
+        assertThat(responsePost.getHeaders().getFirst("Location")).isEqualTo("/");
+
+        HttpResponse<String> response = Unirest
+                .get(baseUrl)
+                .asString();
+        String body = response.getBody();
+
+        assertThat(response.getStatus()).isEqualTo(200);
+        assertThat(body).contains("Некорректный URL");
+    }
+
+    @Test
+    void testCreateUrl_negative2() {
+
+        String inputName = "https://github.com/";
+
+        HttpResponse<String> responsePost = Unirest
+                .post(baseUrl + "/urls")
+                .field("name", inputName)
+                .asEmpty();
+
+        assertThat(responsePost.getStatus()).isEqualTo(302);
+        assertThat(responsePost.getHeaders().getFirst("Location")).isEqualTo("/urls");
+
+        HttpResponse<String> response = Unirest
+                .get(baseUrl + "/urls")
+                .asString();
+        String body = response.getBody();
+
+        assertThat(response.getStatus()).isEqualTo(200);
+        assertThat(body).contains("https://github.com:8080");
+        assertThat(body).contains("Страница уже существует");
+    }
+@Test
+        void testShowUrl() {
+    HttpResponse<String> response = Unirest
+            .get(baseUrl + "/urls/1")
+            .asString();
+
+    String content = response.getBody();
+
+    assertThat(response.getStatus()).isEqualTo(200);
+    assertThat(content).contains("https://github.com:8080");
 
 }
+
+}
+
+

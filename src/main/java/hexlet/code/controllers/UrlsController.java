@@ -25,6 +25,10 @@ public class UrlsController {
                 .orderBy()
                 .id.asc()
                 .findList();
+        if (urlList.isEmpty()) {
+            return false;
+        }
+
         for (Url urlCheck : urlList) {
             if (urlCheck.getName().equals(url)) {
                 return true;

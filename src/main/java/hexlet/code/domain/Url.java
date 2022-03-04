@@ -34,4 +34,6 @@ public class Url extends Model {
     public Instant getCreatedAt() {
         return createdAt;
     }
+
+
 }
