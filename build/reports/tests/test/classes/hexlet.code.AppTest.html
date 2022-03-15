@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">6</div>
+<div class="counter">1</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">3.081s</div>
+<div class="counter">1.931s</div>
 <p>duration</p>
 </div>
 </td>
@@ -78,33 +78,8 @@
 </tr>
 </thead>
 <tr>
-<td class="success">testCreateUrl()</td>
-<td class="success">0.038s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
 <td class="success">testCreateUrl_negative()</td>
-<td class="success">0.026s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testCreateUrl_negative2()</td>
-<td class="success">2.904s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testIndex()</td>
-<td class="success">0.057s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testInit()</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testShowUrl()</td>
-<td class="success">0.053s</td>
+<td class="success">1.931s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -112,12 +87,13 @@
 <div id="tab1" class="tab">
 <h2>Standard error</h2>
 <span class="code">
-<pre>[Test worker] INFO org.eclipse.jetty.util.log - Logging initialized @3765ms to org.eclipse.jetty.util.log.Slf4jLog
+<pre>[Test worker] INFO org.eclipse.jetty.util.log - Logging initialized @2387ms to org.eclipse.jetty.util.log.Slf4jLog
 [Test worker] INFO io.javalin.Javalin - Static file handler added: StaticFileConfig(hostedPath=/, directory=META-INF/resources/webjars, location=CLASSPATH, precompress=false, aliasCheck=null, headers={Cache-Control=max-age=31622400}, skipFileFunction=Function1&lt;javax.servlet.http.HttpServletRequest, java.lang.Boolean&gt;). File system location: 'jar:file:/home/ivan/.gradle/caches/modules-2/files-2.1/org.webjars/bootstrap/5.1.1/4a452dae9386b7ddc6dc4933d7d45b6b3edeab1c/bootstrap-5.1.1.jar!/META-INF/resources/webjars'
 [Test worker] INFO io.javalin.Javalin - JAVALIN HANDLER REGISTRATION DEBUG LOG: GET[/]
 [Test worker] INFO io.javalin.Javalin - JAVALIN HANDLER REGISTRATION DEBUG LOG: GET[/urls]
 [Test worker] INFO io.javalin.Javalin - JAVALIN HANDLER REGISTRATION DEBUG LOG: POST[/urls]
 [Test worker] INFO io.javalin.Javalin - JAVALIN HANDLER REGISTRATION DEBUG LOG: GET[/urls/{id}]
+[Test worker] INFO io.javalin.Javalin - JAVALIN HANDLER REGISTRATION DEBUG LOG: POST[/urls/{id}/checks]
 [Test worker] INFO io.javalin.Javalin - JAVALIN HANDLER REGISTRATION DEBUG LOG: BEFORE[*]
 [Test worker] INFO io.javalin.Javalin - 
        __                      __ _            __ __
@@ -130,339 +106,41 @@
 
 [Test worker] INFO io.javalin.Javalin - Starting Javalin ...
 [Test worker] INFO io.javalin.Javalin - You are running Javalin 4.3.0 (released January 13, 2022).
-[Test worker] INFO io.javalin.Javalin - Listening on http://localhost:35621/
-[Test worker] INFO io.javalin.Javalin - Javalin started in 390ms \o/
+[Test worker] INFO io.javalin.Javalin - Listening on http://localhost:33635/
+[Test worker] INFO io.javalin.Javalin - Javalin started in 279ms \o/
 [Test worker] INFO io.ebean.EbeanVersion - ebean version: 12.11.5
 [Test worker] INFO io.avaje.config.CoreConfiguration - loaded properties from [resource:application.yaml, resource:application-test.yaml] 
-[ForkJoinPool.commonPool-worker-2] INFO io.ebean.test - Using jdbc settings - username:sa url:jdbc:h2:mem:test driver:org.h2.Driver
+[ForkJoinPool.commonPool-worker-1] INFO io.ebean.test - Using jdbc settings - username:sa url:jdbc:h2:mem:test driver:org.h2.Driver
 [Test worker] INFO io.ebean.test - For testing purposes a current user and tenant provider has been configured. Use io.ebean.test.UserContext to set current user and tenant in tests.
-[Test worker] INFO io.ebean.datasource - DataSourcePool [${APP_ENV}] autoCommit[false] transIsolation[READ_COMMITTED] min[2] max[200] in[550ms]
-[Test worker] INFO io.ebean.DDL - Executing ${APP_ENV}-drop-all.sql - 1 statements, autoCommit:true
-[Test worker] INFO io.ebean.DDL - Executing ${APP_ENV}-create-all.sql - 1 statements, autoCommit:false
-[Test worker] INFO io.ebean.DB - started database[${APP_ENV}] platform[H2] in 1574ms
+[Test worker] INFO io.ebean.datasource - DataSourcePool [${APP_ENV}] autoCommit[false] transIsolation[READ_COMMITTED] min[2] max[200] in[406ms]
+[Test worker] INFO io.ebean.DDL - Executing ${APP_ENV}-drop-all.sql - 4 statements, autoCommit:true
+[Test worker] INFO io.ebean.DDL - Executing ${APP_ENV}-create-all.sql - 4 statements, autoCommit:false
+[Test worker] INFO io.ebean.DB - started database[${APP_ENV}] platform[H2] in 1206ms
 [JettyServerThreadPool-24] INFO io.javalin.Javalin - JAVALIN REQUEST DEBUG LOG:
 Request: POST [/urls]
     Matching endpoint-handlers: [BEFORE=*, POST=/urls]
-    Headers: {User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:35621, Accept-Encoding=gzip, Content-Length=32, Content-Type=application/x-www-form-urlencoded; charset=UTF-8}
+    Headers: {User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:33635, Accept-Encoding=gzip, Content-Length=30, Content-Type=application/x-www-form-urlencoded; charset=UTF-8}
     Cookies: {}
-    Body: name=https%3A%2F%2Fgithub.com%2F
-    QueryString: null
-    QueryParams: {}
-    FormParams: {name=[https://github.com/]}
-Response: [302], execution took 152.54 ms
-    Headers: {Set-Cookie=JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0; Path=/; HttpOnly, Expires=Thu, 01 Jan 1970 00:00:00 GMT, Date=Fri, 04 Mar 2022 22:02:19 GMT, Content-Type=text/plain, Location=/urls}
-    No body was set
-----------------------------------------------------------------------------------
-[JettyServerThreadPool-19] INFO io.javalin.Javalin - JAVALIN REQUEST DEBUG LOG:
-Request: GET [/urls]
-    Matching endpoint-handlers: [BEFORE=*, GET=/urls]
-    Headers: {Cookie=JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0, User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:35621, Accept-Encoding=gzip}
-    Cookies: {JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0}
-    Body: 
-    QueryString: null
-    QueryParams: {}
-    FormParams: {}
-Response: [200], execution took 1545.72 ms
-    Headers: {Date=Fri, 04 Mar 2022 22:02:19 GMT, Content-Type=text/html}
-    Body is 1150 bytes (starts on next line):
-    &lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;html lang=&quot;ru&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-    &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css&quot;
-          rel=&quot;stylesheet&quot;
-          integrity=&quot;sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3&quot;
-          crossorigin=&quot;anonymous&quot;&gt;
-    
-    &lt;title&gt;Сайты&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;nav class=&quot;navbar navbar-expand-lg navbar-light bg-light&quot;&gt;
-    &lt;div class=&quot;container&quot;&gt;
-        &lt;a class=&quot;navbar-brand p-3 mb-2 bg-dark text-white&quot; href=&quot;/&quot;&gt;Главная&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;
-&lt;div class=&quot;container mt-3&quot;&gt;
-    &lt;div class=&quot;alert alert-info&quot; role=&quot;alert&quot;&gt;Страница уже существует&lt;/div&gt;
-    &lt;div&gt;&lt;/div&gt;
-    &lt;section&gt;
-    &lt;h1&gt;Сайты&lt;/h1&gt;
-    &lt;table class=&quot;table&quot;&gt;
-        &lt;thead&gt;
-        &lt;th&gt;ID&lt;/th&gt;
-        &lt;th&gt;Имя&lt;/th&gt;
-        &lt;th&gt;Дата&lt;/th&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;1&lt;/td&gt;
-            &lt;td&gt;
-                &lt;a href=&quot;/urls/1&quot;&gt;https://github.com:8080&lt;/a&gt;
-            &lt;/td&gt;
-            &lt;td&gt;05-03-2022 02:02&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/table&gt;
-
-&lt;/section&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
-----------------------------------------------------------------------------------
-[JettyServerThreadPool-23] INFO io.javalin.Javalin - JAVALIN REQUEST DEBUG LOG:
-Request: GET [/]
-    Matching endpoint-handlers: [BEFORE=*, GET=/]
-    Headers: {Cookie=JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0, User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:35621, Accept-Encoding=gzip}
-    Cookies: {JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0}
-    Body: 
-    QueryString: null
-    QueryParams: {}
-    FormParams: {}
-Response: [200], execution took 40.33 ms
-    Headers: {Date=Fri, 04 Mar 2022 22:02:21 GMT, Content-Type=text/html}
-    Body is 1192 bytes (starts on next line):
-    &lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;html lang=&quot;ru&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-    &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css&quot;
-          rel=&quot;stylesheet&quot;
-          integrity=&quot;sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3&quot;
-          crossorigin=&quot;anonymous&quot;&gt;
-    
-    &lt;title&gt;Анализатор страниц&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;nav class=&quot;navbar navbar-expand-lg navbar-light bg-light&quot;&gt;
-    &lt;div class=&quot;container&quot;&gt;
-        &lt;a class=&quot;navbar-brand p-3 mb-2 bg-dark text-white&quot; href=&quot;/&quot;&gt;Главная&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;
-&lt;div class=&quot;container mt-3&quot;&gt;
-    
-    
-    &lt;section&gt;
-    &lt;div class=&quot;container p-3 mb-2 bg-dark text-white&quot;&gt;
-        &lt;h1 class=&quot;display-4 text-center&quot;&gt;Анализатор страниц&lt;/h1&gt;
-        &lt;form action=&quot;/urls&quot; method=&quot;post&quot;&gt;
-            &lt;div class=&quot;mb-3&quot;&gt;
-                &lt;label&gt; Url&lt;/label&gt;
-                &lt;input class=&quot;form-control&quot; type=&quot;url&quot; name=&quot;name&quot;&gt;
-            &lt;/div&gt;
-            &lt;button class=&quot;btn btn-primary&quot; href=&quot;/urls&quot;
-                    type=&quot;submit&quot;&gt;Создать
-            &lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-&lt;/section&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
-----------------------------------------------------------------------------------
-[JettyServerThreadPool-25] INFO io.javalin.Javalin - JAVALIN REQUEST DEBUG LOG:
-Request: POST [/urls]
-    Matching endpoint-handlers: [BEFORE=*, POST=/urls]
-    Headers: {Cookie=JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0, User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:35621, Accept-Encoding=gzip, Content-Length=30, Content-Type=application/x-www-form-urlencoded; charset=UTF-8}
-    Cookies: {JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0}
     Body: name=hps%3A%2F%2Fgithub.com%2F
     QueryString: null
     QueryParams: {}
     FormParams: {name=[hps://github.com/]}
-Response: [302], execution took 0.76 ms
-    Headers: {Date=Fri, 04 Mar 2022 22:02:21 GMT, Content-Type=text/plain, Location=/}
+Response: [302], execution took 34.03 ms
+    Headers: {Set-Cookie=JSESSIONID=node01nlg8l4b6276x1pzuk9nimksu30.node0; Path=/; HttpOnly, Expires=Thu, 01 Jan 1970 00:00:00 GMT, Date=Tue, 15 Mar 2022 13:09:54 GMT, Content-Type=text/plain, Location=/}
     No body was set
 ----------------------------------------------------------------------------------
-[JettyServerThreadPool-23] INFO io.javalin.Javalin - JAVALIN REQUEST DEBUG LOG:
+[JettyServerThreadPool-20] INFO io.javalin.Javalin - JAVALIN REQUEST DEBUG LOG:
 Request: GET [/]
     Matching endpoint-handlers: [BEFORE=*, GET=/]
-    Headers: {Cookie=JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0, User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:35621, Accept-Encoding=gzip}
-    Cookies: {JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0}
+    Headers: {Cookie=JSESSIONID=node01nlg8l4b6276x1pzuk9nimksu30.node0, User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:33635, Accept-Encoding=gzip}
+    Cookies: {JSESSIONID=node01nlg8l4b6276x1pzuk9nimksu30.node0}
     Body: 
     QueryString: null
     QueryParams: {}
     FormParams: {}
-Response: [200], execution took 13.91 ms
-    Headers: {Date=Fri, 04 Mar 2022 22:02:21 GMT, Content-Type=text/html}
-    Body is 1268 bytes (starts on next line):
-    &lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;html lang=&quot;ru&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-    &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css&quot;
-          rel=&quot;stylesheet&quot;
-          integrity=&quot;sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3&quot;
-          crossorigin=&quot;anonymous&quot;&gt;
-    
-    &lt;title&gt;Анализатор страниц&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;nav class=&quot;navbar navbar-expand-lg navbar-light bg-light&quot;&gt;
-    &lt;div class=&quot;container&quot;&gt;
-        &lt;a class=&quot;navbar-brand p-3 mb-2 bg-dark text-white&quot; href=&quot;/&quot;&gt;Главная&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;
-&lt;div class=&quot;container mt-3&quot;&gt;
-    &lt;div class=&quot;alert alert-info&quot; role=&quot;alert&quot;&gt;Некорректный URL&lt;/div&gt;
-    &lt;div&gt;&lt;/div&gt;
-    &lt;section&gt;
-    &lt;div class=&quot;container p-3 mb-2 bg-dark text-white&quot;&gt;
-        &lt;h1 class=&quot;display-4 text-center&quot;&gt;Анализатор страниц&lt;/h1&gt;
-        &lt;form action=&quot;/urls&quot; method=&quot;post&quot;&gt;
-            &lt;div class=&quot;mb-3&quot;&gt;
-                &lt;label&gt; Url&lt;/label&gt;
-                &lt;input class=&quot;form-control&quot; type=&quot;url&quot; name=&quot;name&quot;&gt;
-            &lt;/div&gt;
-            &lt;button class=&quot;btn btn-primary&quot; href=&quot;/urls&quot;
-                    type=&quot;submit&quot;&gt;Создать
-            &lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-&lt;/section&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
-----------------------------------------------------------------------------------
-[JettyServerThreadPool-25] INFO io.javalin.Javalin - JAVALIN REQUEST DEBUG LOG:
-Request: POST [/urls]
-    Matching endpoint-handlers: [BEFORE=*, POST=/urls]
-    Headers: {Cookie=JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0, User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:35621, Accept-Encoding=gzip, Content-Length=34, Content-Type=application/x-www-form-urlencoded; charset=UTF-8}
-    Cookies: {JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0}
-    Body: name=https%3A%2F%2Fru.hexlet.io%2F
-    QueryString: null
-    QueryParams: {}
-    FormParams: {name=[https://ru.hexlet.io/]}
-Response: [302], execution took 2.20 ms
-    Headers: {Date=Fri, 04 Mar 2022 22:02:21 GMT, Content-Type=text/plain, Location=/urls}
-    No body was set
-----------------------------------------------------------------------------------
-[JettyServerThreadPool-23] INFO io.javalin.Javalin - JAVALIN REQUEST DEBUG LOG:
-Request: GET [/urls]
-    Matching endpoint-handlers: [BEFORE=*, GET=/urls]
-    Headers: {Cookie=JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0, User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:35621, Accept-Encoding=gzip}
-    Cookies: {JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0}
-    Body: 
-    QueryString: null
-    QueryParams: {}
-    FormParams: {}
-Response: [200], execution took 19.54 ms
-    Headers: {Date=Fri, 04 Mar 2022 22:02:21 GMT, Content-Type=text/html}
-    Body is 1340 bytes (starts on next line):
-    &lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;html lang=&quot;ru&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-    &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css&quot;
-          rel=&quot;stylesheet&quot;
-          integrity=&quot;sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3&quot;
-          crossorigin=&quot;anonymous&quot;&gt;
-    
-    &lt;title&gt;Сайты&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;nav class=&quot;navbar navbar-expand-lg navbar-light bg-light&quot;&gt;
-    &lt;div class=&quot;container&quot;&gt;
-        &lt;a class=&quot;navbar-brand p-3 mb-2 bg-dark text-white&quot; href=&quot;/&quot;&gt;Главная&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;
-&lt;div class=&quot;container mt-3&quot;&gt;
-    &lt;div class=&quot;alert alert-info&quot; role=&quot;alert&quot;&gt;Страница успешно добавлена&lt;/div&gt;
-    &lt;div&gt;&lt;/div&gt;
-    &lt;section&gt;
-    &lt;h1&gt;Сайты&lt;/h1&gt;
-    &lt;table class=&quot;table&quot;&gt;
-        &lt;thead&gt;
-        &lt;th&gt;ID&lt;/th&gt;
-        &lt;th&gt;Имя&lt;/th&gt;
-        &lt;th&gt;Дата&lt;/th&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;1&lt;/td&gt;
-            &lt;td&gt;
-                &lt;a href=&quot;/urls/1&quot;&gt;https://github.com:8080&lt;/a&gt;
-            &lt;/td&gt;
-            &lt;td&gt;05-03-2022 02:02&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;2&lt;/td&gt;
-            &lt;td&gt;
-                &lt;a href=&quot;/urls/2&quot;&gt;https://ru.hexlet.io:8080&lt;/a&gt;
-            &lt;/td&gt;
-            &lt;td&gt;05-03-2022 02:02&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/table&gt;
-
-&lt;/section&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
-----------------------------------------------------------------------------------
-[JettyServerThreadPool-25] INFO io.javalin.Javalin - JAVALIN REQUEST DEBUG LOG:
-Request: GET [/urls/1]
-    Matching endpoint-handlers: [BEFORE=*, GET=/urls/{id}]
-    Headers: {Cookie=JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0, User-Agent=unirest-java/3.1.00, Connection=keep-alive, Host=localhost:35621, Accept-Encoding=gzip}
-    Cookies: {JSESSIONID=node0t0pd7lztyogf1hk455oe4ak3m0.node0}
-    Body: 
-    QueryString: null
-    QueryParams: {}
-    FormParams: {}
-Response: [200], execution took 47.03 ms
-    Headers: {Date=Fri, 04 Mar 2022 22:02:21 GMT, Content-Type=text/html}
-    Body is 1014 bytes (starts on next line):
-    &lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;html lang=&quot;ru&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-    &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css&quot;
-          rel=&quot;stylesheet&quot;
-          integrity=&quot;sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3&quot;
-          crossorigin=&quot;anonymous&quot;&gt;
-    
-    &lt;title&gt;Сайты&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;nav class=&quot;navbar navbar-expand-lg navbar-light bg-light&quot;&gt;
-    &lt;div class=&quot;container&quot;&gt;
-        &lt;a class=&quot;navbar-brand p-3 mb-2 bg-dark text-white&quot; href=&quot;/&quot;&gt;Главная&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;
-&lt;div class=&quot;container mt-3&quot;&gt;
-    
-    
-    &lt;section&gt;
-    &lt;h1&gt;Сайт&lt;/h1&gt;
-    &lt;table class=&quot;table&quot;&gt;
-        &lt;thead&gt;
-        &lt;th&gt;ID&lt;/th&gt;
-        &lt;th&gt;Имя&lt;/th&gt;
-        &lt;th&gt;Дата&lt;/th&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;1&lt;/td&gt;
-            &lt;td&gt;https://github.com:8080&lt;/td&gt;
-            &lt;td&gt;05-03-2022 02:02&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/table&gt;
-
-&lt;/section&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
+Response: [200], execution took 1205.43 ms
+    Headers: {Content-Encoding=gzip, Date=Tue, 15 Mar 2022 13:09:54 GMT, Content-Type=text/html}
+    Body is gzipped (1453 bytes, not logged)
 ----------------------------------------------------------------------------------
 [Test worker] INFO io.javalin.Javalin - Stopping Javalin ...
 [Test worker] INFO io.javalin.Javalin - Javalin has stopped
@@ -477,7 +155,7 @@ Response: [200], execution took 47.03 ms
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.2</a> at 5 мар. 2022 г., 02:02:22</p>
+<a href="http://www.gradle.org">Gradle 7.2</a> at 15 мар. 2022 г., 17:09:56</p>
 </div>
 </div>
 </body>

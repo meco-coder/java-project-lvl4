@@ -3,13 +3,12 @@
 import io.ebean.Model;
 import io.ebean.annotation.WhenCreated;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.Clock;
+import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
-public class Url extends Model {
+public final class Url extends Model {
     @Id
     private long id;
 
@@ -18,23 +17,42 @@ public class Url extends Model {
     @WhenCreated
     private Instant createdAt;
 
-<span class="fc" id="L21">    public Url(String name) {</span>
-<span class="fc" id="L22">        this.name = name;</span>
-<span class="fc" id="L23">        this.createdAt = Clock.systemUTC().instant();</span>
-<span class="fc" id="L24">    }</span>
+    @OneToMany(cascade = CascadeType.ALL)
+    private List&lt;UrlCheck&gt; urlCheckList;
+
+<span class="fc" id="L23">    public Url(String name) {</span>
+<span class="fc" id="L24">        this.name = name;</span>
+<span class="fc" id="L25">    }</span>
 
     public Long getId() {
-<span class="fc" id="L27">        return id;</span>
+<span class="nc" id="L28">        return id;</span>
     }
 
     public String getName() {
-<span class="fc" id="L31">        return name;</span>
+<span class="nc" id="L32">        return name;</span>
     }
 
     public Instant getCreatedAt() {
-<span class="fc" id="L35">        return createdAt;</span>
+<span class="nc" id="L36">        return createdAt;</span>
     }
 
+    public List&lt;UrlCheck&gt; getUrlCheckList() {
+<span class="nc" id="L40">        return urlCheckList;</span>
+    }
+
+    public int lastStatusCodeCheck() {
+
+<span class="nc" id="L45">            return urlCheckList.get(urlCheckList.size() - 1).getStatusCode();</span>
+    }
+
+    public Instant lastCreatedAtCheck() {
+
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (urlCheckList.isEmpty()) {</span>
+<span class="nc" id="L51">            return Instant.parse(&quot;&quot;);</span>
+        }
+
+<span class="nc" id="L54">        return urlCheckList.get(urlCheckList.size() - 1).getCreatedAt();</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

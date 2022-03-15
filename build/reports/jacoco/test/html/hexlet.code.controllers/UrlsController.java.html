@@ -5,93 +5,96 @@ import hexlet.code.domain.query.QUrl;
 
 import io.javalin.http.Handler;
 
+
 import java.net.URL;
 import java.util.List;
 
 
-<span class="nc" id="L12">public class UrlsController {</span>
+<span class="nc" id="L13">public class UrlsController {</span>
 
     private static Boolean UrlValidator(String url) {
         try {
-<span class="fc" id="L16">            new URL(url).toURI();</span>
-<span class="fc" id="L17">            return true;</span>
-<span class="fc" id="L18">        } catch (Exception e) {</span>
-<span class="fc" id="L19">            return false;</span>
+<span class="nc" id="L17">            new URL(url).toURI();</span>
+<span class="nc" id="L18">            return true;</span>
+<span class="fc" id="L19">        } catch (Exception e) {</span>
+<span class="fc" id="L20">            return false;</span>
         }
     }
 
     private static Boolean CheckUrls(String url) {
-<span class="fc" id="L24">        List&lt;Url&gt; urlList = new QUrl()</span>
-<span class="fc" id="L25">                .orderBy()</span>
-<span class="fc" id="L26">                .id.asc()</span>
-<span class="fc" id="L27">                .findList();</span>
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if (urlList.isEmpty()) {</span>
-<span class="nc" id="L29">            return false;</span>
+<span class="nc" id="L25">        List&lt;Url&gt; urlList = new QUrl()</span>
+<span class="nc" id="L26">                .orderBy()</span>
+<span class="nc" id="L27">                .id.asc()</span>
+<span class="nc" id="L28">                .findList();</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        if (urlList.isEmpty()) {</span>
+<span class="nc" id="L30">            return false;</span>
         }
 
-<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (Url urlCheck : urlList) {</span>
-<span class="fc bfc" id="L33" title="All 2 branches covered.">            if (urlCheck.getName().equals(url)) {</span>
-<span class="fc" id="L34">                return true;</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        for (Url urlCheck : urlList) {</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">            if (urlCheck.getName().equals(url)) {</span>
+<span class="nc" id="L35">                return true;</span>
             }
-<span class="fc" id="L36">        }</span>
-<span class="fc" id="L37">        return false;</span>
+<span class="nc" id="L37">        }</span>
+<span class="nc" id="L38">        return false;</span>
     }
 
     private static String BuildUrl(URL url) {
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (url.getPort() == -1) {</span>
-<span class="fc" id="L42">            return &quot;https://&quot; + url.getHost() + &quot;:8080&quot;;</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (url.getPort() == -1) {</span>
+
+<span class="nc" id="L44">            return url.getProtocol() + &quot;://&quot; + url.getHost();</span>
         }
-<span class="nc" id="L44">        return &quot;https://&quot; + url.getHost() + &quot;:&quot; + url.getPort();</span>
+<span class="nc" id="L46">        return url.getProtocol() + &quot;://&quot; + url.getHost() + &quot;:&quot; + url.getPort();</span>
     }
 
 
-<span class="fc" id="L48">    public static Handler listUrls = ctx -&gt; {</span>
+<span class="fc" id="L50">    public static Handler listUrls = ctx -&gt; {</span>
 
-<span class="fc" id="L50">        List&lt;Url&gt; urlSt = new QUrl()</span>
-<span class="fc" id="L51">                .orderBy()</span>
-<span class="fc" id="L52">                .id.asc()</span>
-<span class="fc" id="L53">                .findList();</span>
+<span class="nc" id="L52">        List&lt;Url&gt; urlSt = new QUrl()</span>
+<span class="nc" id="L53">                .orderBy()</span>
+<span class="nc" id="L54">                .id.asc()</span>
+<span class="nc" id="L55">                .findList();</span>
 
-<span class="fc" id="L55">        ctx.attribute(&quot;urls&quot;, urlSt);</span>
-<span class="fc" id="L56">        ctx.render(&quot;urls/index.html&quot;);</span>
-<span class="fc" id="L57">    };</span>
+<span class="nc" id="L57">        ctx.attribute(&quot;urls&quot;, urlSt);</span>
+<span class="nc" id="L58">        ctx.render(&quot;urls/index.html&quot;);</span>
+<span class="nc" id="L59">    };</span>
 
-<span class="fc" id="L59">    public static Handler createUrl = ctx -&gt; {</span>
+<span class="fc" id="L61">    public static Handler createUrl = ctx -&gt; {</span>
 
-<span class="fc" id="L61">        String name = ctx.formParam(&quot;name&quot;);</span>
+<span class="fc" id="L63">        String name = ctx.formParam(&quot;name&quot;);</span>
 
-<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (UrlValidator(name)) {</span>
-<span class="fc" id="L64">            URL url = new URL(name);</span>
-<span class="fc" id="L65">            String buildUrl = BuildUrl(url);</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">            if (CheckUrls(buildUrl)) {</span>
-<span class="fc" id="L67">                ctx.sessionAttribute(&quot;flash&quot;, &quot;Страница уже существует&quot;);</span>
-<span class="fc" id="L68">                ctx.redirect(&quot;/urls&quot;);</span>
-<span class="fc" id="L69">                return;</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (UrlValidator(name)) {</span>
+<span class="nc" id="L66">            URL url = new URL(name);</span>
+<span class="nc" id="L67">            String buildUrl = BuildUrl(url);</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">            if (CheckUrls(buildUrl)) {</span>
+<span class="nc" id="L69">                ctx.sessionAttribute(&quot;flash&quot;, &quot;Страница уже существует&quot;);</span>
+<span class="nc" id="L70">                ctx.redirect(&quot;/urls&quot;);</span>
+<span class="nc" id="L71">                return;</span>
             }
-<span class="fc" id="L71">            Url urls = new Url(buildUrl);</span>
-<span class="fc" id="L72">            urls.save();</span>
-<span class="fc" id="L73">            ctx.sessionAttribute(&quot;flash&quot;, &quot;Страница успешно добавлена&quot;);</span>
-<span class="fc" id="L74">            ctx.redirect(&quot;/urls&quot;);</span>
-<span class="fc" id="L75">        } else {</span>
-<span class="fc" id="L76">            ctx.sessionAttribute(&quot;flash&quot;, &quot;Некорректный URL&quot;);</span>
-<span class="fc" id="L77">            ctx.redirect(&quot;/&quot;);</span>
+<span class="nc" id="L73">            Url urls = new Url(buildUrl);</span>
+<span class="nc" id="L74">            urls.save();</span>
+<span class="nc" id="L75">            ctx.sessionAttribute(&quot;flash&quot;, &quot;Страница успешно добавлена&quot;);</span>
+<span class="nc" id="L76">            ctx.redirect(&quot;/urls&quot;);</span>
+<span class="nc" id="L77">        } else {</span>
+<span class="fc" id="L78">            ctx.sessionAttribute(&quot;flash&quot;, &quot;Некорректный URL&quot;);</span>
+<span class="fc" id="L79">            ctx.redirect(&quot;/&quot;);</span>
         }
 
-<span class="fc" id="L80">    };</span>
+<span class="fc" id="L82">    };</span>
 
 
-<span class="fc" id="L83">    public static Handler showUrl = ctx -&gt; {</span>
+<span class="fc" id="L85">    public static Handler showUrl = ctx -&gt; {</span>
 
-<span class="fc" id="L85">        long id = ctx.pathParamAsClass(&quot;id&quot;, Long.class).getOrDefault(null);</span>
+<span class="nc" id="L87">        long id = ctx.pathParamAsClass(&quot;id&quot;, Long.class).getOrDefault(null);</span>
 
-<span class="fc" id="L87">        Url url = new QUrl()</span>
-<span class="fc" id="L88">                .id.equalTo(id)</span>
-<span class="fc" id="L89">                .findOne();</span>
+<span class="nc" id="L89">        Url url = new QUrl()</span>
+<span class="nc" id="L90">                .id.equalTo(id)</span>
+<span class="nc" id="L91">                .findOne();</span>
 
-<span class="fc" id="L91">        ctx.attribute(&quot;url&quot;, url);</span>
-<span class="fc" id="L92">        ctx.render(&quot;urls/show.html&quot;);</span>
+<span class="nc" id="L93">        ctx.attribute(&quot;url&quot;, url);</span>
+<span class="nc" id="L94">        ctx.render(&quot;urls/show.html&quot;);</span>
 
 
-<span class="fc" id="L95">    };</span>
+<span class="nc" id="L97">    };</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
