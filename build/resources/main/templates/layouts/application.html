@@ -9,20 +9,38 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossorigin="anonymous">
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand p-3 mb-2 bg-dark text-white" href="/">Анализатор страниц</a>
-        <a class="navbar-brand p-3 mb-2 bg-dark text-white" href="/">Главная</a>
-        <a class="navbar-brand p-3 mb-2 bg-dark text-white" href="/urls">Сайты</a>
+<body class="d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="/">Анализатор страниц</a>
+        <div id="navbarNav" class="collapse navbar-collapse">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">Главная</a>
+                <a class="nav-link" href="/urls">Сайты</a>
+            </div>
+        </div>
     </div>
 </nav>
-<div class="container mt-3">
+
+<main class="flex-grow-1">
+
     <div th:if="${session.flash}" class="alert alert-info" role="alert" th:text="${session.flash}"></div>
     <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
-    <div th:if="${session.flashError}" class="alert-danger" role="alert" th:text="${session.flashError}"></div>
+    <div th:if="${session.flashError}" class="alert-danger" role="alert"
+         th:text="${session.flashError}"></div>
     <div th:if="${session.flashError}" th:text="${#session.removeAttribute('flashError')}"></div>
+
     <section layout:fragment="content"></section>
-</div>
+</main>
+
+<footer class="footer border-top py-3 mt-5 bg-light">
+    <div class="container-xl">
+        <div class="text-center"> Created by
+            <a href="https://github.com/meco-coder" target="_blank"> Ivan Markov</a>
+        </div>
+    </div>
+
+</footer>
+
 </body>
 </html>

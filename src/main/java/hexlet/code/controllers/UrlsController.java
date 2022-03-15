@@ -60,7 +60,7 @@ public class UrlsController {
 
     public static Handler createUrl = ctx -> {
 
-        String nameUrl = ctx.formParam("name");
+        String nameUrl = ctx.formParam("url");
 
         if (UrlValidator(nameUrl)) {
             URL url = new URL(nameUrl);
