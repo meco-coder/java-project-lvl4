@@ -6,7 +6,7 @@
     <title>Сайты</title>
 </head>
 
-<section layout:fragment="content">
+<section layout:fragment="content" th:object="${url}">
     <h1>Сайт</h1>
     <table class="table">
         <thead>
@@ -20,6 +20,31 @@
             <td th:text="*{name}"></td>
             <td th:text="${#temporals.format(url.getCreatedAt, 'dd-MM-yyyy HH:mm')}"></td>
         </tr>
+    </table>
+    <form th:action="@{/urls/{id}/checks(id=*{id})}" method="post">
+        <button class="btn btn-primary" type="submit">Проверить
+        </button>
+    </form>
+
+    <table class="table">
+        <thead>
+        <th>ID</th>
+        <th>Код ответа</th>
+        <th>title</th>
+        <th>h1</th>
+        <th>description</th>
+        <th>Дата проверки</th>
+        </thead>
+        <tbody>
+        <tr th:each="UrlCheck : ${url.urlCheckList}" th:object="${UrlCheck}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{statusCode}"></td>
+            <td th:text="*{title}"></td>
+            <td th:text="*{h1}"></td>
+            <td th:text="*{description}"></td>
+            <td th:text="${#temporals.format(UrlCheck.getCreatedAt, 'dd-MM-yyyy HH:mm')}"></td>
+        </tr>
+        </tbody>
     </table>
 
 </section>

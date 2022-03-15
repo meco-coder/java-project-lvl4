@@ -47,6 +47,8 @@ dependencies {
 
     implementation 'com.konghq:unirest-java:3.11.09'
 
+    implementation 'org.jsoup:jsoup:1.14.3'
+
     implementation 'io.ebean:ebean:12.11.5'
     implementation 'io.ebean:ebean-ddl-generator:12.11.5'
     implementation 'io.ebean:ebean-querybean:12.11.5'
@@ -66,6 +68,7 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.21.0'
     testImplementation 'io.ebean:ebean-test:12.12.0'
     testImplementation 'com.konghq:unirest-java:3.13.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.3'
 }
 
 

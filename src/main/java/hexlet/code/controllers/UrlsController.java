@@ -5,6 +5,7 @@ import hexlet.code.domain.query.QUrl;
 
 import io.javalin.http.Handler;
 
+
 import java.net.URL;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class UrlsController {
         }
     }
 
-    private static Boolean CheckUrls(String url) {
+    private static Boolean CheckUrl(String url) {
         List<Url> urlList = new QUrl()
                 .orderBy()
                 .id.asc()
@@ -39,31 +40,32 @@ public class UrlsController {
 
     private static String BuildUrl(URL url) {
         if (url.getPort() == -1) {
-            return "https://" + url.getHost() + ":8080";
+
+            return url.getProtocol() + "://" + url.getHost();
         }
-        return "https://" + url.getHost() + ":" + url.getPort();
+        return url.getProtocol() + "://" + url.getHost() + ":" + url.getPort();
     }
 
 
     public static Handler listUrls = ctx -> {
 
-        List<Url> urlSt = new QUrl()
+        List<Url> urlsList = new QUrl()
                 .orderBy()
                 .id.asc()
                 .findList();
 
-        ctx.attribute("urls", urlSt);
+        ctx.attribute("urls", urlsList);
         ctx.render("urls/index.html");
     };
 
     public static Handler createUrl = ctx -> {
 
-        String name = ctx.formParam("name");
+        String nameUrl = ctx.formParam("name");
 
-        if (UrlValidator(name)) {
-            URL url = new URL(name);
+        if (UrlValidator(nameUrl)) {
+            URL url = new URL(nameUrl);
             String buildUrl = BuildUrl(url);
-            if (CheckUrls(buildUrl)) {
+            if (CheckUrl(buildUrl)) {
                 ctx.sessionAttribute("flash", "Страница уже существует");
                 ctx.redirect("/urls");
                 return;
@@ -79,7 +81,6 @@ public class UrlsController {
 
     };
 
-
     public static Handler showUrl = ctx -> {
 
         long id = ctx.pathParamAsClass("id", Long.class).getOrDefault(null);
@@ -93,4 +94,5 @@ public class UrlsController {
 
 
     };
+
 }

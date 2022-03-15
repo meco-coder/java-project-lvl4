@@ -12,12 +12,16 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
+        <a class="navbar-brand p-3 mb-2 bg-dark text-white" href="/">Анализатор страниц</a>
         <a class="navbar-brand p-3 mb-2 bg-dark text-white" href="/">Главная</a>
+        <a class="navbar-brand p-3 mb-2 bg-dark text-white" href="/urls">Сайты</a>
     </div>
 </nav>
 <div class="container mt-3">
     <div th:if="${session.flash}" class="alert alert-info" role="alert" th:text="${session.flash}"></div>
     <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
+    <div th:if="${session.flashError}" class="alert-danger" role="alert" th:text="${session.flashError}"></div>
+    <div th:if="${session.flashError}" th:text="${#session.removeAttribute('flashError')}"></div>
     <section layout:fragment="content"></section>
 </div>
 </body>

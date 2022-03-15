@@ -12,7 +12,8 @@
         <thead>
         <th>ID</th>
         <th>Имя</th>
-        <th>Дата</th>
+        <th>Код ответа</th>
+        <th>Последняя проверка</th>
         </thead>
         <tbody>
         <tr th:each="url : ${urls}" th:object="${url}">
@@ -20,7 +21,9 @@
             <td>
                 <a th:text="*{name}" th:href="@{/urls/{id}(id=*{id})}"></a>
             </td>
-            <td th:text="${#temporals.format(url.getCreatedAt, 'dd-MM-yyyy HH:mm')}"></td>
+            <td th:text="${url.urlCheckList.size != 0} ? ${url.lastStatusCodeCheck} : ' '"></td>
+            <td th:text="${url.urlCheckList.size != 0} ?
+            ${#temporals.format(url.lastCreatedAtCheck, 'dd-MM-yyyy HH:mm')} : ' '"></td>
         </tr>
     </table>
 

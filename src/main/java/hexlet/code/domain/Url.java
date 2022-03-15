@@ -3,13 +3,12 @@ package hexlet.code.domain;
 import io.ebean.Model;
 import io.ebean.annotation.WhenCreated;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.Clock;
+import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
-public class Url extends Model {
+public final class Url extends Model {
     @Id
     private long id;
 
@@ -18,9 +17,11 @@ public class Url extends Model {
     @WhenCreated
     private Instant createdAt;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<UrlCheck> urlCheckList;
+
     public Url(String name) {
         this.name = name;
-        this.createdAt = Clock.systemUTC().instant();
     }
 
     public Long getId() {
@@ -35,5 +36,22 @@ public class Url extends Model {
         return createdAt;
     }
 
+    public List<UrlCheck> getUrlCheckList() {
+        return urlCheckList;
+    }
+
+    public int lastStatusCodeCheck() {
+
+            return urlCheckList.get(urlCheckList.size() - 1).getStatusCode();
+    }
+
+    public Instant lastCreatedAtCheck() {
+
+        if (urlCheckList.isEmpty()) {
+            return Instant.parse("");
+        }
+
+        return urlCheckList.get(urlCheckList.size() - 1).getCreatedAt();
+    }
 
 }
