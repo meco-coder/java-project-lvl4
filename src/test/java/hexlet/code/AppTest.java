@@ -188,10 +188,6 @@ public class AppTest {
     @Test
     void testCheckUrl() {
 
-        HttpResponse<String> response = Unirest.get(baseUrl).asString();
-        assertThat(response.getStatus()).isEqualTo(200);
-        assertThat(response.getBody()).contains("Анализатор страниц");
-
         String inputName = urlMockServer;
         HttpResponse responsePost = Unirest
                 .post(baseUrl + "/urls")
@@ -201,12 +197,12 @@ public class AppTest {
         assertThat(responsePost.getStatus()).isEqualTo(302);
         assertThat(responsePost.getHeaders().getFirst("Location")).isEqualTo("/urls");
 
-        HttpResponse<String> response1 = Unirest
+        HttpResponse<String> response = Unirest
                 .get(baseUrl + "/urls")
                 .asString();
-        String body = response1.getBody();
+        String body = response.getBody();
 
-        assertThat(response1.getStatus()).isEqualTo(200);
+        assertThat(response.getStatus()).isEqualTo(200);
         assertThat(body).contains(urlMockServer);
         assertThat(body).contains("Страница успешно добавлена");
 

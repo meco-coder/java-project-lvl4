@@ -24,8 +24,8 @@
                     <a th:text="*{name}" th:href="@{/urls/{id}(id=*{id})}"></a>
                 </td>
                 <td th:text="${url.urlCheckList.size != 0} ?
-            ${#temporals.format(url.lastCreatedAtCheck, 'dd-MM-yyyy HH:mm')} : ' '"></td>
-                <td th:text="${url.urlCheckList.size != 0} ? ${url.lastStatusCodeCheck} : ' '"></td>
+            ${#temporals.format(url.lastCreatedAtFromUrlCheckList, 'dd-MM-yyyy HH:mm')} : ' '"></td>
+                <td th:text="${url.urlCheckList.size != 0} ? ${url.lastStatusCodeFromUrlCheckList} : ' '"></td>
             </tr>
         </table>
 

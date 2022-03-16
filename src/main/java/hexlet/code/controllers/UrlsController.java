@@ -24,7 +24,7 @@ public class UrlsController {
         }
     }
 
-    private static Boolean checkUrl(String url) {
+    private static Boolean checkUrlIsEmpty(String url) {
 
         List<Url> urlList = new QUrl()
                 .orderBy()
@@ -51,7 +51,7 @@ public class UrlsController {
     }
 
 
-    public static Handler listUrls = ctx -> {
+    public static Handler pagedListUrls = ctx -> {
 
         int page = ctx.queryParamAsClass("page", Integer.class).getOrDefault(1) - 1;
         int rowsPerPage = 10;
@@ -87,7 +87,7 @@ public class UrlsController {
         if (urlValidator(nameUrl)) {
             URL url = new URL(nameUrl);
             String buildUrl = buildUrl(url);
-            if (checkUrl(buildUrl)) {
+            if (checkUrlIsEmpty(buildUrl)) {
                 ctx.sessionAttribute("flash", "Страница уже существует");
                 ctx.redirect("/urls");
                 return;

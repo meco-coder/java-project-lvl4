@@ -48,7 +48,7 @@ public class App {
                 get(RootController.welcome);
             });
             path("urls", () -> {
-                get(UrlsController.listUrls);
+                get(UrlsController.pagedListUrls);
                 post(UrlsController.createUrl);
                 get("{id}", UrlsController.showUrl);
                 post("{id}/checks", UrlCheckController.checkUrl);

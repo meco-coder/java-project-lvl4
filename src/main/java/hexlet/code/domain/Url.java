@@ -43,12 +43,12 @@ public final class Url extends Model {
         return urlCheckList;
     }
 
-    public int lastStatusCodeCheck() {
+    public int lastStatusCodeFromUrlCheckList() {
         final UrlCheck urlCheck = urlCheckList.get(urlCheckList.size() - 1);
         return urlCheck.getStatusCode();
     }
 
-    public Instant lastCreatedAtCheck() {
+    public Instant lastCreatedAtFromUrlCheckList() {
 
         if (urlCheckList.isEmpty()) {
             return Instant.parse("");

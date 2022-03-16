@@ -20,9 +20,9 @@ public class UrlCheckController {
                 .id.equalTo(id)
                 .findOne();
 
-        final HttpResponse<String> responseUrl;
+        final HttpResponse<String> response;
         try {
-            responseUrl = Unirest.get(url.getName())
+            response = Unirest.get(url.getName())
                     .asString();
         } catch (Throwable e) {
             ctx.sessionAttribute("flashError", e.getMessage());
@@ -30,9 +30,9 @@ public class UrlCheckController {
             return;
         }
 
-        int status = responseUrl.getStatus();
-        Document doc = Jsoup.parse(responseUrl.getBody());
+        int status = response.getStatus();
 
+        Document doc = Jsoup.parse(response.getBody());
         String title = doc.title();
 
         String description = "";
