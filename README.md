@@ -9,4 +9,8 @@
 <a href="https://hexletprojectlvl4.herokuapp.com">Page Analyzer</a> is a site that analyzes specified pages for SEO suitability.
 
 
-[url=https://ibb.co/QDH2NfY][img]https://i.ibb.co/J3pf7Kr/2022-03-16-14-02-28.png[/img][/url]
+<a href="https://ibb.co/QDH2NfY"><img src="https://i.ibb.co/J3pf7Kr/2022-03-16-14-02-28.png" alt="2022-03-16-14-02-28" border="0"></a>
+
+<a href="https://ibb.co/5rq1QwV"><img src="https://i.ibb.co/HtmKc3Q/2022-03-16-14-10-57.png" alt="2022-03-16-14-10-57" border="0"></a>
+
+<a href="https://ibb.co/8MQ29ct"><img src="https://i.ibb.co/fMTtHvL/2022-03-16-14-11-48.png" alt="2022-03-16-14-11-48" border="0"></a>
