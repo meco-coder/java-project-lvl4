@@ -3,7 +3,10 @@
 import io.ebean.Model;
 import io.ebean.annotation.WhenCreated;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import java.time.Instant;
 
 @Entity
@@ -27,65 +30,65 @@ public final class UrlCheck extends Model {
     private Url url;
 
 
-<span class="fc" id="L30">    public UrlCheck() {</span>
+<span class="fc" id="L33">    public UrlCheck() {</span>
 
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L35">    }</span>
 
 
-<span class="nc" id="L35">    public UrlCheck(int statusCode, String title, String h1, String description, Url url) {</span>
-<span class="nc" id="L36">        this.statusCode = statusCode;</span>
-<span class="nc" id="L37">        this.title = title;</span>
-<span class="nc" id="L38">        this.h1 = h1;</span>
-<span class="nc" id="L39">        this.description = description;</span>
-<span class="nc" id="L40">        this.url = url;</span>
-<span class="nc" id="L41">    }</span>
+<span class="fc" id="L38">    public UrlCheck(int statusCode, String title, String h1, String description, Url url) {</span>
+<span class="fc" id="L39">        this.statusCode = statusCode;</span>
+<span class="fc" id="L40">        this.title = title;</span>
+<span class="fc" id="L41">        this.h1 = h1;</span>
+<span class="fc" id="L42">        this.description = description;</span>
+<span class="fc" id="L43">        this.url = url;</span>
+<span class="fc" id="L44">    }</span>
 
     public long getId() {
-<span class="nc" id="L44">        return id;</span>
+<span class="fc" id="L47">        return id;</span>
     }
 
     public int getStatusCode() {
-<span class="nc" id="L48">        return statusCode;</span>
+<span class="fc" id="L51">        return statusCode;</span>
     }
 
     public String getTitle() {
-<span class="nc" id="L52">        return title;</span>
+<span class="fc" id="L55">        return title;</span>
     }
 
     public String getH1() {
-<span class="nc" id="L56">        return h1;</span>
+<span class="fc" id="L59">        return h1;</span>
     }
 
     public String getDescription() {
-<span class="nc" id="L60">        return description;</span>
+<span class="fc" id="L63">        return description;</span>
     }
 
     public Url getUrl() {
-<span class="nc" id="L64">        return url;</span>
+<span class="nc" id="L67">        return url;</span>
     }
 
     public Instant getCreatedAt() {
-<span class="nc" id="L68">        return createdAt;</span>
+<span class="fc" id="L71">        return createdAt;</span>
     }
 
     public void setStatusCode(int statusCode) {
-<span class="nc" id="L72">        this.statusCode = statusCode;</span>
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L75">        this.statusCode = statusCode;</span>
+<span class="nc" id="L76">    }</span>
 
     public void setTitle(String title) {
-<span class="nc" id="L76">        this.title = title;</span>
-<span class="nc" id="L77">    }</span>
+<span class="nc" id="L79">        this.title = title;</span>
+<span class="nc" id="L80">    }</span>
 
     public void setH1(String h1) {
-<span class="nc" id="L80">        this.h1 = h1;</span>
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L83">        this.h1 = h1;</span>
+<span class="nc" id="L84">    }</span>
 
     public void setDescription(String description) {
-<span class="nc" id="L84">        this.description = description;</span>
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L87">        this.description = description;</span>
+<span class="nc" id="L88">    }</span>
 
     public void setUrl(Url url) {
-<span class="nc" id="L88">        this.url = url;</span>
-<span class="nc" id="L89">    }</span>
+<span class="nc" id="L91">        this.url = url;</span>
+<span class="nc" id="L92">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
