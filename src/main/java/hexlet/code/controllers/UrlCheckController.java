@@ -52,7 +52,7 @@ public class UrlCheckController {
         UrlCheck urlCheck = new UrlCheck(status, title, h1, description, url);
         urlCheck.save();
 
-        ctx.sessionAttribute("flash", "Сайт успешно проверен");
+        ctx.sessionAttribute("flash", "Страница успешно проверена");
         ctx.redirect("/urls/" + id);
 
     };
