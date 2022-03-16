@@ -3,11 +3,14 @@ package hexlet.code.controllers;
 import hexlet.code.domain.Url;
 import hexlet.code.domain.query.QUrl;
 
+import io.ebean.PagedList;
 import io.javalin.http.Handler;
 
 
 import java.net.URL;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class UrlsController {
@@ -22,6 +25,7 @@ public class UrlsController {
     }
 
     private static Boolean CheckUrl(String url) {
+
         List<Url> urlList = new QUrl()
                 .orderBy()
                 .id.asc()
@@ -49,12 +53,30 @@ public class UrlsController {
 
     public static Handler listUrls = ctx -> {
 
-        List<Url> urlsList = new QUrl()
+        int page = ctx.queryParamAsClass("page", Integer.class).getOrDefault(1) - 1;
+        int rowsPerPage = 10;
+
+        PagedList<Url> pagedUrls = new QUrl()
+                .setFirstRow(page * rowsPerPage)
+                .setMaxRows(rowsPerPage)
                 .orderBy()
                 .id.asc()
-                .findList();
+                .findPagedList();
 
-        ctx.attribute("urls", urlsList);
+        List<Url> urls = pagedUrls.getList();
+
+        int lastPage = pagedUrls.getTotalPageCount() + 1;
+        int currentPage = pagedUrls.getPageIndex() + 1;
+
+        List<Integer> pages = IntStream
+                .range(1, lastPage)
+                .boxed()
+                .collect(Collectors.toList());
+
+
+        ctx.attribute("urls", urls);
+        ctx.attribute("pages", pages);
+        ctx.attribute("currentPage", currentPage);
         ctx.render("urls/index.html");
     };
 
@@ -75,7 +97,7 @@ public class UrlsController {
             ctx.sessionAttribute("flash", "Страница успешно добавлена");
             ctx.redirect("/urls");
         } else {
-            ctx.sessionAttribute("flash", "Некорректный URL");
+            ctx.sessionAttribute("flashError", "Некорректный URL");
             ctx.redirect("/");
         }
 

@@ -6,16 +6,27 @@
     <title>Анализатор страниц</title>
 </head>
 <section layout:fragment="content">
-    <div class="container p-3 mb-2 bg-dark text-white">
-        <h1 class="display-4 text-center">Анализатор страниц</h1>
-        <form action="/urls" method="post">
-            <div class="mb-3">
-                <label> Url</label>
-                <input class="form-control" type="url" name="name">
+    <div class="container-fluid bg-dark p-5">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto text-white">
+                <h1 class="display-3 mb-0">Анализатор страниц</h1>
+                <p class="lead"> Бесплатно проверяйте сайты на SEO пригодность </p>
+                <form class="rss-form text-body" action="/urls" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input id="url-input" class="form-control w-100" autofocus="" type="text" required=""
+                                       name="url" aria-label="url"  autocomplete="off">
+                                <label for="url-input">Ссылка</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button class="h-100 btn btn-lg btn-primary px-sm-5" type="submit"> Проверить </button>
+                        </div>
+                    </div>
+                </form>
+                <p class="mt-2 mb-0 text-muted"> Пример: https://github.com </p>
             </div>
-            <button class="btn btn-primary" th:href="@{/urls}"
-                    type="submit">Создать
-            </button>
-        </form>
+        </div>
     </div>
 </section>
