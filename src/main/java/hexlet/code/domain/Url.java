@@ -3,7 +3,10 @@ package hexlet.code.domain;
 import io.ebean.Model;
 import io.ebean.annotation.WhenCreated;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.Instant;
 import java.util.List;
 
@@ -41,8 +44,8 @@ public final class Url extends Model {
     }
 
     public int lastStatusCodeCheck() {
-
-            return urlCheckList.get(urlCheckList.size() - 1).getStatusCode();
+        final UrlCheck urlCheck = urlCheckList.get(urlCheckList.size() - 1);
+        return urlCheck.getStatusCode();
     }
 
     public Instant lastCreatedAtCheck() {

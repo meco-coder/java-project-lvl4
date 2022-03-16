@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 
 public class UrlsController {
 
-    private static Boolean UrlValidator(String url) {
+    private static Boolean urlValidator(String url) {
         try {
             new URL(url).toURI();
             return true;
@@ -24,7 +24,7 @@ public class UrlsController {
         }
     }
 
-    private static Boolean CheckUrl(String url) {
+    private static Boolean checkUrl(String url) {
 
         List<Url> urlList = new QUrl()
                 .orderBy()
@@ -42,7 +42,7 @@ public class UrlsController {
         return false;
     }
 
-    private static String BuildUrl(URL url) {
+    private static String buildUrl(URL url) {
         if (url.getPort() == -1) {
 
             return url.getProtocol() + "://" + url.getHost();
@@ -84,10 +84,10 @@ public class UrlsController {
 
         String nameUrl = ctx.formParam("url");
 
-        if (UrlValidator(nameUrl)) {
+        if (urlValidator(nameUrl)) {
             URL url = new URL(nameUrl);
-            String buildUrl = BuildUrl(url);
-            if (CheckUrl(buildUrl)) {
+            String buildUrl = buildUrl(url);
+            if (checkUrl(buildUrl)) {
                 ctx.sessionAttribute("flash", "Страница уже существует");
                 ctx.redirect("/urls");
                 return;

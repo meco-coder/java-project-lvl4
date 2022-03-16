@@ -33,7 +33,7 @@ public class AppTest {
     private static String baseUrl;
     private static String urlMockServer;
     private static Transaction transaction;
-    private static final MockWebServer server = new MockWebServer();
+    private static final MockWebServer SERVER = new MockWebServer();
 
     @BeforeAll
     public static void beforeAll() throws IOException {
@@ -42,23 +42,23 @@ public class AppTest {
         int port = app.port();
         baseUrl = "http://localhost:" + port;
 
-        server.enqueue(new MockResponse().setBody("<!DOCTYPE HTML>\n" +
-                "<html>\n" +
-                " <head>\n" +
-                "  <meta charset=\"utf-8\">\n" +
-                "  <title>Тестирование</title>\n" +
-                " <meta name=\"description\" content=\"Описание страницы сайта.\"/>\n" +
-                " </head>\n" +
-                " <body>\n" +
-                "\n" +
-                "  <h1>Здесь могла быть ваша реклама</h1>\n" +
-                "\n" +
-                " </body>\n" +
-                "</html>"));
+        SERVER.enqueue(new MockResponse().setBody("<!DOCTYPE HTML>\n"
+                + "<html>\n"
+                + " <head>\n"
+                + "  <meta charset=\"utf-8\">\n"
+                + "  <title>Тестирование</title>\n"
+                + " <meta name=\"description\" content=\"Описание страницы сайта.\"/>\n"
+                + " </head>\n"
+                + " <body>\n"
+                + "\n"
+                + "  <h1>Здесь могла быть ваша реклама</h1>\n"
+                + "\n"
+                + " </body>\n"
+                + "</html>"));
 
-        server.start();
+        SERVER.start();
 
-        URL url = new URL(server.url("/").toString());
+        URL url = new URL(SERVER.url("/").toString());
         urlMockServer = url.getProtocol() + "://" + url.getHost() + ":" + url.getPort();
 
         Url existingUrl = new Url("https://github.com");
@@ -70,16 +70,22 @@ public class AppTest {
     @AfterAll
     public static void afterAll() throws IOException {
         app.stop();
-        server.shutdown();
+        SERVER.shutdown();
     }
 
+    /**
+     * @since OpenJDK version 17.0.1
+     */
     @BeforeEach
-    void beforeEach() {
+     void beforeEach() {
         transaction = DB.beginTransaction();
     }
 
+    /**
+     * @since OpenJDK version 17.0.1
+     */
     @AfterEach
-    void afterEach() {
+     void afterEach() {
         transaction.rollback();
     }
 
@@ -95,7 +101,7 @@ public class AppTest {
         String inputName = "https://ru.hexlet.io/";
         HttpResponse responsePost = Unirest
                 .post(baseUrl + "/urls")
-                .field("name", inputName)
+                .field("url", inputName)
                 .asEmpty();
 
         assertThat(responsePost.getStatus()).isEqualTo(302);
@@ -120,11 +126,11 @@ public class AppTest {
 
 
     @Test
-    void testCreateUrl_negative() {
+    void testCreateUrlNegative() {
         String inputName = "hps://github.com/";
         HttpResponse responsePost = Unirest
                 .post(baseUrl + "/urls")
-                .field("name", inputName)
+                .field("url", inputName)
                 .asEmpty();
 
         assertThat(responsePost.getStatus()).isEqualTo(302);
@@ -140,13 +146,13 @@ public class AppTest {
     }
 
     @Test
-    void testCreateUrl_negative2() {
+    void testCreateUrlNegative2() {
 
         String inputName = "https://github.com/";
 
         HttpResponse responsePost = Unirest
                 .post(baseUrl + "/urls")
-                .field("name", inputName)
+                .field("url", inputName)
                 .asEmpty();
 
         assertThat(responsePost.getStatus()).isEqualTo(302);
@@ -161,59 +167,60 @@ public class AppTest {
         assertThat(body).contains("https://github.com");
         assertThat(body).contains("Страница уже существует");
     }
-@Test
-        void testShowUrl() {
-    HttpResponse<String> response = Unirest
-            .get(baseUrl + "/urls/1")
-            .asString();
-
-    String content = response.getBody();
-
-    assertThat(response.getStatus()).isEqualTo(200);
-    assertThat(content).contains("https://github.com");
-
-}
 
     @Test
-    void testCheckUrl() {
+    void testShowUrl() {
+        HttpResponse<String> response = Unirest
+                .get(baseUrl + "/urls/1")
+                .asString();
 
-        HttpResponse<String> response = Unirest.get(baseUrl).asString();
+        String content = response.getBody();
+
         assertThat(response.getStatus()).isEqualTo(200);
-        assertThat(response.getBody()).contains("Анализатор страниц");
-
-        String inputName = urlMockServer;
-        HttpResponse responsePost = Unirest
-                .post(baseUrl + "/urls")
-                .field("name", inputName)
-                .asEmpty();
-
-        assertThat(responsePost.getStatus()).isEqualTo(302);
-        assertThat(responsePost.getHeaders().getFirst("Location")).isEqualTo("/urls");
-
-        HttpResponse<String> response1 = Unirest
-                .get(baseUrl + "/urls")
-                .asString();
-        String body = response1.getBody();
-
-        assertThat(response1.getStatus()).isEqualTo(200);
-        assertThat(body).contains(urlMockServer);
-        assertThat(body).contains("Страница успешно добавлена");
-
-        Url actualUrl = new QUrl()
-                .name.equalTo(urlMockServer)
-                .findOne();
-
-        assertThat(actualUrl).isNotNull();
-        assertThat(actualUrl.getName()).isEqualTo(urlMockServer);
-
-        HttpResponse<String> response2 = Unirest
-                .post(baseUrl + "/urls/2/checks")
-                .asString();
-
-        String body2 = response1.getBody();
-
+        assertThat(content).contains("https://github.com");
 
     }
+
+//    @Test
+//    void testCheckUrl() {
+//
+//        HttpResponse<String> response = Unirest.get(baseUrl).asString();
+//        assertThat(response.getStatus()).isEqualTo(200);
+//        assertThat(response.getBody()).contains("Анализатор страниц");
+//
+//        String inputName = urlMockServer;
+//        HttpResponse responsePost = Unirest
+//                .post(baseUrl + "/urls")
+//                .field("url", inputName)
+//                .asEmpty();
+//
+//        assertThat(responsePost.getStatus()).isEqualTo(302);
+//        assertThat(responsePost.getHeaders().getFirst("Location")).isEqualTo("/urls");
+//
+//        HttpResponse<String> response1 = Unirest
+//                .get(baseUrl + "/urls")
+//                .asString();
+//        String body = response1.getBody();
+//
+//        assertThat(response1.getStatus()).isEqualTo(200);
+//        assertThat(body).contains(urlMockServer);
+//        assertThat(body).contains("Страница успешно добавлена");
+//
+//        Url actualUrl = new QUrl()
+//                .name.equalTo(urlMockServer)
+//                .findOne();
+//
+//        assertThat(actualUrl).isNotNull();
+//        assertThat(actualUrl.getName()).isEqualTo(urlMockServer);
+//
+//        HttpResponse<String> response2 = Unirest
+//                .post(baseUrl + "/urls/2/checks")
+//                .asString();
+//
+//        String body2 = response1.getBody();
+//
+//
+//    }
 }
 
 
