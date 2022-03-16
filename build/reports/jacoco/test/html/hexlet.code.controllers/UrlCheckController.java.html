@@ -20,9 +20,9 @@ import org.jsoup.nodes.Document;
 <span class="nc" id="L20">                .id.equalTo(id)</span>
 <span class="nc" id="L21">                .findOne();</span>
 
-        final HttpResponse&lt;String&gt; bodyString;
+        final HttpResponse&lt;String&gt; responseUrl;
         try {
-<span class="nc" id="L25">            bodyString = Unirest.get(url.getName())</span>
+<span class="nc" id="L25">            responseUrl = Unirest.get(url.getName())</span>
 <span class="nc" id="L26">                    .asString();</span>
 <span class="nc" id="L27">        } catch (Throwable e) {</span>
 <span class="nc" id="L28">            ctx.sessionAttribute(&quot;flashError&quot;, e.getMessage());</span>
@@ -30,8 +30,8 @@ import org.jsoup.nodes.Document;
 <span class="nc" id="L30">            return;</span>
 <span class="nc" id="L31">        }</span>
 
-<span class="nc" id="L33">        int status = bodyString.getStatus();</span>
-<span class="nc" id="L34">        Document doc = Jsoup.parse(bodyString.getBody());</span>
+<span class="nc" id="L33">        int status = responseUrl.getStatus();</span>
+<span class="nc" id="L34">        Document doc = Jsoup.parse(responseUrl.getBody());</span>
 
 <span class="nc" id="L36">        String title = doc.title();</span>
 
