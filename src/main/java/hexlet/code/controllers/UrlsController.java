@@ -22,10 +22,12 @@ public class UrlsController {
                 .id.asc()
                 .findList();
 
-        List<Boolean> check = urlList.stream()
-                .map(x -> url.equals(x.getName())).toList();
-
-        return check.get(0);
+        for (Url urlCheck : urlList) {
+            if (urlCheck.getName().equals(url)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static String buildUrl(URL url) {
