@@ -18,11 +18,14 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class AppTest {
+public final class AppTest {
 
     @Test
     void testInit() {
@@ -43,20 +46,9 @@ public class AppTest {
         baseUrl = "http://localhost:" + port;
 
         server = new MockWebServer();
-        server.enqueue(new MockResponse().setBody("<!DOCTYPE HTML>\n"
-                + "<html>\n"
-                + " <head>\n"
-                + "  <meta charset=\"utf-8\">\n"
-                + "  <title>Тестирование</title>\n"
-                + " <meta name=\"description\" content=\"Описание страницы сайта.\"/>\n"
-                + " </head>\n"
-                + " <body>\n"
-                + "\n"
-                + "  <h1>Здесь могла быть ваша реклама</h1>\n"
-                + "\n"
-                + " </body>\n"
-                + "</html>")
-        );
+        final Path fileForParse = Paths.get("src/test/resources/page-test.html").normalize()
+                .toAbsolutePath();
+        server.enqueue(new MockResponse().setBody(Files.readString(fileForParse)));
 
         server.start();
 
@@ -76,17 +68,12 @@ public class AppTest {
         server.shutdown();
     }
 
-    /**
-     * @since OpenJDK version 17.0.1
-     */
     @BeforeEach
     void beforeEach() {
         transaction = DB.beginTransaction();
     }
 
-    /**
-     * @since OpenJDK version 17.0.1
-     */
+
     @AfterEach
     void afterEach() {
         transaction.rollback();

@@ -15,31 +15,17 @@ import java.util.stream.IntStream;
 
 public class UrlsController {
 
-    private static Boolean urlValidator(String url) {
-        try {
-            new URL(url).toURI();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private static Boolean checkUrlIsEmpty(String url) {
+    private static boolean isUrlExist(String url) {
 
         List<Url> urlList = new QUrl()
                 .orderBy()
                 .id.asc()
                 .findList();
-        if (urlList.isEmpty()) {
-            return false;
-        }
 
-        for (Url urlCheck : urlList) {
-            if (urlCheck.getName().equals(url)) {
-                return true;
-            }
-        }
-        return false;
+        List<Boolean> check = urlList.stream()
+                .map(x -> url.equals(x.getName())).toList();
+
+        return check.get(0);
     }
 
     private static String buildUrl(URL url) {
@@ -83,23 +69,27 @@ public class UrlsController {
     public static Handler createUrl = ctx -> {
 
         String nameUrl = ctx.formParam("url");
-
-        if (urlValidator(nameUrl)) {
-            URL url = new URL(nameUrl);
-            String buildUrl = buildUrl(url);
-            if (checkUrlIsEmpty(buildUrl)) {
-                ctx.sessionAttribute("flash", "Страница уже существует");
-                ctx.redirect("/urls");
-                return;
-            }
-            Url urls = new Url(buildUrl);
-            urls.save();
-            ctx.sessionAttribute("flash", "Страница успешно добавлена");
-            ctx.redirect("/urls");
-        } else {
+        final URL url;
+        final String buildUrl;
+        try {
+            url = new URL(nameUrl);
+            buildUrl = buildUrl(url);
+        } catch (Exception e) {
             ctx.sessionAttribute("flashError", "Некорректный URL");
             ctx.redirect("/");
+            return;
         }
+        if (isUrlExist(buildUrl)) {
+            ctx.sessionAttribute("flash", "Страница уже существует");
+            ctx.redirect("/urls");
+            return;
+        }
+
+        Url urls = new Url(buildUrl);
+        urls.save();
+        ctx.sessionAttribute("flash", "Страница успешно добавлена");
+        ctx.redirect("/urls");
+
 
     };
 

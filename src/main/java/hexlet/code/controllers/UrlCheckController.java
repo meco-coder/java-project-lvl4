@@ -31,7 +31,6 @@ public class UrlCheckController {
         }
 
         int status = response.getStatus();
-
         Document doc = Jsoup.parse(response.getBody());
         String title = doc.title();
 
